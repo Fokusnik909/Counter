@@ -8,25 +8,19 @@
 import UIKit
 
 class ViewController: UIViewController {
-
-    
-    @IBOutlet weak var countLabel: UILabel!
-    
-    @IBOutlet weak var minusButton: UIButton!
-    @IBOutlet weak var plusButton: UIButton!
-    @IBOutlet weak var resetButton: UIButton!
-    
+    @IBOutlet private weak var countLabel: UILabel!
+    @IBOutlet private weak var minusButton: UIButton!
+    @IBOutlet private weak var plusButton: UIButton!
+    @IBOutlet private weak var resetButton: UIButton!
     @IBOutlet weak var historyTextView: UITextView!
     
-    var counter = 0 {
+    private var counter = 0 {
         didSet {
             countLabel.text = "\(counter)"
         }
     }
-    
-    
-    
-    override func viewDidLoad() {
+
+     override func viewDidLoad() {
         super.viewDidLoad()
         let config = UIImage.SymbolConfiguration(pointSize: 35)
         let image = UIImage(systemName: "arrow.circlepath",withConfiguration: config)
@@ -44,13 +38,13 @@ class ViewController: UIViewController {
     
     }
 
-    @IBAction func plusButtonPressed(_ sender: Any) {
+    @IBAction private func plusButtonPressed(_ sender: Any) {
         counter += 1
         let dateString = dateHistory()
         historyTextView.text += "\n [\(dateString)]: значение изменено на +1  "
     }
     
-    @IBAction func minusButtonPressed(_ sender: Any) {
+    @IBAction private func minusButtonPressed(_ sender: Any) {
         let dateString = dateHistory()
         if counter > 0 {
             counter -= 1
@@ -60,13 +54,13 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func resetButtonPressed(_ sender: Any) {
+    @IBAction private func resetButtonPressed(_ sender: Any) {
         counter = 0
         let dateString = dateHistory()
         historyTextView.text += "\n [\(dateString)]: значение сброшено "
     }
     
-    func dateHistory() -> String {
+    private func dateHistory() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd.MM.yyyy HH:mm:ss"
         let dateString = dateFormatter.string(from: Date())
